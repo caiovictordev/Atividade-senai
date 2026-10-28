@@ -1,8 +1,8 @@
 import express from "express"
 
-const routes = (app)=>{
+const routes = (app) => {
 
-    app.route('/').get((req, res)=>{
+    app.route('/').get((req, res) => {
         let message = "Servidor Rodando"
         res.status(200).send(message)
     })
