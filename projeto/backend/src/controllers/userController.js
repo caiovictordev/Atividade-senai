@@ -25,13 +25,19 @@ class ControlerUser {
                     message: "Todos os campos devem ser preenchidos"
                 })
             }
+            const userCpf = await userModel.findCpf(cpf)
+            if (userCpf) {
+                return res.status(400).json({
+                    message: "Este cpf já foi registrado"
+                })
+            }
+
             const userEmail = await userModel.findEmail(email)
             if (userEmail) {
                 return res.status(400).json({
                     message: "Este usuário já existe"
                 })
             }
-
 
             const hash = await bcrypt.hash(senha, 10)
             await userModel.userRegister(nome, cpf, email, hash)
@@ -57,7 +63,7 @@ class ControlerUser {
             }
 
             const user = await userModel.findEmail(email)
-            if(!user){
+            if (!user) {
                 return res.status(400).json({
                     message: "Email ou senha incorretos"
                 })
@@ -67,7 +73,7 @@ class ControlerUser {
                 senha,
                 user.senha
             )
-            if(!passwordCompare){
+            if (!passwordCompare) {
                 return res.status(400).json({
                     message: "Email ou senha incorretos"
                 })
@@ -85,6 +91,27 @@ class ControlerUser {
         }
     }
 
+    static async deleteUser(req, res) {
+        try {
+            const { id } = req.params;
+            if (!/^[1-9]\d*$/.test(id)) {
+                return res.status(400).json({
+                    message: "ID invalido."
+                });
+            }
+
+            return res.status(200).json({
+                message: "Usuário excluido"
+            })
+
+        } catch (error) {
+            console.error(error)
+            return res.status(500).json({
+                message: "Erro interno no Servidor"
+            })
+        }
+
+    }
 
 }
 
