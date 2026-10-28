@@ -10,15 +10,16 @@ async function getUser() {
 }
 
 //Cadastrar usuário no banco de dados
-async function userRegister(nome, email, senha) {
+async function userRegister(nome, cpf, email, senha) {
     const sql = `
         INSERT INTO users(
         nome,
+        cpf,
         email, 
         senha
-        )VALUES(?, ?, ?);   
+        )VALUES(?, ?, ?, ?);   
     `;
-    const [dados] = await conect.execute(sql, [nome, email, senha])
+    const [dados] = await conect.execute(sql, [nome, cpf, email, senha])
     return dados
 }
 
