@@ -1,0 +1,181 @@
+
+/* Página de login */
+.loginPage {
+    display: flex;
+    width: 100%;
+    min-height: 100vh;
+    margin: 0;
+    background-color: #fff;
+    border-radius: 0;
+    overflow: hidden;
+    box-shadow: none;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Formulário */
+.loginPage .containerInput {
+    flex: 1.2;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 45px 55px;
+    background-color: #fff;
+}
+
+.loginPage .containerInput h2 {
+    font-size: 36px;
+    color: #111;
+    margin: 0 0 30px;
+    text-align: center;
+}
+
+.loginPage .containerInput form {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    width: 100%;
+    max-width: 450px;
+}
+
+.loginPage .containerInput label {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 100%;
+}
+
+.loginPage .containerInput label span {
+    font-size: 14px;
+    font-weight: 600;
+    color: #444;
+}
+
+.loginPage .containerInput input {
+    width: 100%;
+    padding: 15px 20px;
+    border: 1px solid transparent;
+    border-radius: 12px;
+    outline: none;
+    background-color: #eee;
+    color: #222;
+    font-size: 16px;
+    transition: 0.2s ease;
+}
+
+.loginPage .containerInput input::placeholder {
+    color: #858585;
+}
+
+.loginPage .containerInput input:focus {
+    background-color: #fff;
+    border-color: #f0443c;
+    box-shadow: 0 0 0 3px rgba(240, 68, 60, 0.12);
+}
+
+/* Botão */
+.loginPage .containerInput button {
+    width: 100%;
+    padding: 16px;
+    margin-top: 5px;
+    border: none;
+    border-radius: 12px;
+    background-color: #f0443c;
+    color: #fff;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.loginPage .containerInput button:hover {
+    background-color: #d93630;
+    transform: translateY(-2px);
+}
+
+/* Link para cadastro */
+.loginPage .containerInput form a {
+    color: #f0443c;
+    font-size: 14px;
+    text-align: center;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.loginPage .containerInput form a:hover {
+    color: #b92c26;
+    text-decoration: underline;
+}
+
+/* Painel vermelho */
+.loginPage .containerText {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 50px 40px;
+    background: linear-gradient(135deg, #ff493f, #f0443c);
+    color: #fff;
+    text-align: center;
+    border-radius: 180px 0 0 180px;
+    box-shadow: 5px 5px 20px black ;
+}
+
+.loginPage .containerText h2 {
+    font-size: 38px;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+.loginPage .containerText p {
+    max-width: 380px;
+    font-size: 17px;
+    line-height: 1.7;
+    margin-bottom: 30px;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .loginPage {
+        flex-direction: column-reverse;
+        width: 92%;
+        margin: 20px auto;
+        border-radius: 22px;
+    }
+
+    .loginPage .containerText {
+        flex: auto;
+        padding: 35px 25px;
+        border-radius: 0 0 0 80px;
+    }
+
+    .loginPage .containerText h2 {
+        font-size: 30px;
+    }
+
+    .loginPage .containerText p {
+        font-size: 15px;
+        margin-bottom: 10px;
+    }
+
+    .loginPage .containerInput {
+        flex: auto;
+        padding: 35px 25px;
+    }
+
+    .loginPage .containerInput h2 {
+        font-size: 28px;
+    }
+}
+
+@media (max-width: 400px) {
+    .loginPage .containerInput {
+        padding: 30px 18px;
+    }
+
+    .loginPage .containerText h2 {
+        font-size: 26px;
+    }
+}

@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom"
+import "./Cadastro.css"
 const Cadastro = () => {
   return (
     <div className="cadastroPage">
@@ -19,11 +20,11 @@ const Cadastro = () => {
                 </label>
                 <label>
                     <span>Email</span>
-                    <input type="text" placeholder="Seu email aqui"/>
+                    <input type="email" placeholder="Seu email aqui"/>
                 </label>
                 <label>
                     <span>Senha</span>
-                    <input type="text" placeholder="Sua senha aqui"/>
+                    <input type="password" placeholder="Sua senha aqui"/>
                 </label>
                 <button type="submit">Concluir cadastro</button>
 

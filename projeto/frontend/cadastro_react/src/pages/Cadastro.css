@@ -1,0 +1,161 @@
+
+/* Página de cadastro */
+.cadastroPage {
+    display: flex;
+    width: 100%;
+    min-height: 100vh;
+    margin: 0;
+    background-color: #fff;
+    border-radius: 0;
+    overflow: hidden;
+    box-shadow: none;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.cadastroPage .containerText {
+    flex: 1;
+    background: linear-gradient(135deg, #ff493f, #f0443c);
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 50px 40px;
+    text-align: center;
+    border-radius: 0 180px 180px 0;
+    box-shadow: 5px 5px 20px gray ;
+}
+
+.cadastroPage .containerText h2 {
+    font-size: 38px;
+    margin-bottom: 20px;
+}
+
+.cadastroPage .containerText p {
+    max-width: 380px;
+    font-size: 17px;
+    line-height: 1.7;
+    margin-bottom: 30px;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.cadastroPage .containerInput {
+    flex: 1.2;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 45px 55px;
+
+}
+
+.cadastroPage .containerInput h2 {
+    font-size: 36px;
+    color: #111;
+    margin: 0 0 30px;
+    text-align: center;
+}
+
+.cadastroPage .containerInput form {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    width: 100%;
+    max-width: 450px;
+}
+
+.cadastroPage .containerInput label {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 100%;
+}
+
+.cadastroPage .containerInput label span {
+    font-size: 14px;
+    font-weight: 600;
+    color: #444;
+}
+
+.cadastroPage .containerInput input {
+    width: 100%;
+    padding: 15px 20px;
+    border: 1px solid transparent;
+    border-radius: 12px;
+    outline: none;
+    background: #eee;
+    color: #222;
+    font-size: 16px;
+    transition: 0.2s ease;
+}
+
+.cadastroPage .containerInput input:focus {
+    background: #fff;
+    border-color: #f0443c;
+    box-shadow: 0 0 0 3px rgba(240, 68, 60, 0.12);
+}
+
+.cadastroPage .containerInput button {
+    width: 100%;
+    padding: 16px;
+    margin-top: 5px;
+    border: none;
+    border-radius: 12px;
+    background: #f0443c;
+    color: #fff;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.cadastroPage .containerInput button:hover {
+    background: #d93630;
+    transform: translateY(-2px);
+}
+
+.cadastroPage .containerInput form a {
+    color: #f0443c;
+    font-size: 14px;
+    text-align: center;
+    text-decoration: none;
+}
+
+.cadastroPage .containerInput form a:hover {
+    color: #b92c26;
+    text-decoration: underline;
+}
+
+/* Responsividade exclusiva do cadastro */
+@media (max-width: 768px) {
+    .cadastroPage {
+        flex-direction: column;
+        width: 92%;
+        margin: 20px auto;
+        border-radius: 22px;
+    }
+
+    .cadastroPage .containerText {
+        flex: auto;
+        padding: 35px 25px;
+        border-radius: 0 0 100px 0;
+    }
+
+    .cadastroPage .containerText h2 {
+        font-size: 30px;
+    }
+
+    .cadastroPage .containerText p {
+        font-size: 15px;
+        margin-bottom: 10px;
+    }
+
+    .cadastroPage .containerInput {
+        flex: auto;
+        padding: 35px 25px;
+    }
+
+    .cadastroPage .containerInput h2 {
+        font-size: 28px;
+    }
+}
