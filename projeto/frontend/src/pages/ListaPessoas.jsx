@@ -57,15 +57,17 @@ const ListaPessoas = () => {
             const dados = await resposta.json();
 
             if (!resposta.ok) {
-                setMensagem(dados.message || "Erro ao excluir pessoa.");
+                alert(dados.message || "Erro ao excluir pessoa.");
                 return;
             }
 
             setPessoas((listaAtual) =>
-                listaAtual.filter((pessoa) => pessoa.id !== id)
+                listaAtual.filter(
+                    (pessoa) => pessoa.id !== id
+                )
             );
 
-            setMensagem(dados.message);
+            alert(dados.message || "Pessoa excluída com sucesso!");
         } catch (error) {
             console.error(error);
             setMensagem("Não foi possível conectar ao servidor.");
@@ -116,12 +118,16 @@ const ListaPessoas = () => {
                     </div>
                 </div>
 
+                {mensagem && (
+                    <p className="listaPessoasMensagem" role="status">
+                        {mensagem}
+                    </p>
+                )}
+
                 {carregando ? (
                     <p className="listaPessoasMensagem">
                         Carregando pessoas...
                     </p>
-                ) : mensagem ? (
-                    <p className="listaPessoasMensagem">{mensagem}</p>
                 ) : pessoas.length === 0 ? (
                     <p className="listaPessoasMensagem">
                         Nenhuma pessoa cadastrada ainda.
@@ -138,7 +144,6 @@ const ListaPessoas = () => {
                                     <th>UID RFID</th>
                                     <th>Editar</th>
                                     <th>Deletar</th>
-
                                 </tr>
                             </thead>
 
@@ -146,15 +151,15 @@ const ListaPessoas = () => {
                                 {pessoas.map((pessoa) => (
                                     <tr key={pessoa.id}>
                                         <td>{pessoa.nome}</td>
+
                                         <td>
-                                            <span
-                                                className={`tipoPessoa ${pessoa.tipo}`}
-                                            >
+                                            <span className={`tipoPessoa ${pessoa.tipo}`}>
                                                 {pessoa.tipo === "aluno"
                                                     ? "Aluno"
                                                     : "Professor"}
                                             </span>
                                         </td>
+
                                         <td>
                                             {pessoa.turno === "manha"
                                                 ? "Manhã"
@@ -162,19 +167,24 @@ const ListaPessoas = () => {
                                                 ? "Tarde"
                                                 : "Noite"}
                                         </td>
+
                                         <td>{pessoa.turma || "—"}</td>
                                         <td>{pessoa.uid_rfid}</td>
+
                                         <td>
                                             <button
                                                 type="button"
                                                 className="btnEditar"
-                                                onClick={() => navigate("/pessoas", {
-                                                    state: { pessoa }
-                                                })}
+                                                onClick={() =>
+                                                    navigate("/pessoas", {
+                                                        state: { pessoa }
+                                                    })
+                                                }
                                             >
                                                 Editar
                                             </button>
                                         </td>
+
                                         <td>
                                             <button
                                                 type="button"
