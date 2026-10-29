@@ -166,6 +166,16 @@ const ListaPessoas = () => {
                                         <td>
                                             <button
                                                 type="button"
+                                                className="btnEditar"
+                                                onClick={() => navigate("/pessoas", {
+                                                    state: { pessoa }
+                                                })}
+                                            >
+                                                Editar
+                                            </button>
+
+                                            <button
+                                                type="button"
                                                 className="btnExcluir"
                                                 onClick={() => excluirPessoa(pessoa.id)}
                                             >

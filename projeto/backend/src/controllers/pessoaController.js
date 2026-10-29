@@ -35,6 +35,7 @@ class PessoaController {
             return res.status(201).json({
                 message: "Pessoa cadastrada com sucesso!"
             });
+
         } catch (error) {
             console.error(error);
 
@@ -55,11 +56,64 @@ class PessoaController {
             const pessoas = await pessoaModel.listarPessoas();
 
             return res.status(200).json(pessoas);
+
         } catch (error) {
             console.error(error);
 
             return res.status(500).json({
                 message: "Erro ao buscar pessoas cadastradas."
+            });
+        }
+    }
+
+    static async atualizar(req, res) {
+        try {
+            const { id } = req.params;
+            const {
+                nome,
+                tipo,
+                turno,
+                turma,
+                uid_rfid
+            } = req.body;
+
+            if (!/^[1-9]\d*$/.test(id)) {
+                return res.status(400).json({
+                    message: "ID inválido."
+                });
+            }
+
+            if (!nome || !tipo || !turno || !uid_rfid) {
+                return res.status(400).json({
+                    message: "Preencha os campos obrigatórios."
+                });
+            }
+
+            const resultado = await pessoaModel.atualizarPessoa(
+                id,
+                { nome, tipo, turno, turma, uid_rfid }
+            );
+
+            if (resultado.affectedRows === 0) {
+                return res.status(404).json({
+                    message: "Pessoa não encontrada."
+                });
+            }
+
+            return res.status(200).json({
+                message: "Pessoa atualizada com sucesso."
+            });
+        } catch (error) {
+            if (error.code === "ER_DUP_ENTRY") {
+                return res.status(409).json({
+                    message: "Este UID RFID já está cadastrado."
+                });
+            }
+
+            console.error(error);
+
+            return res.status(500).json({
+                message: "Erro ao atualizar pessoa."
             });
         }
     }
@@ -85,6 +139,7 @@ class PessoaController {
             return res.status(200).json({
                 message: "Pessoa excluída com sucesso!"
             });
+
         } catch (error) {
             console.error(error);
 

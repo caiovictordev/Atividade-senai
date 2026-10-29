@@ -18,6 +18,29 @@ async function cadastrarPessoa(nome, tipo, turno, turma, uid_rfid) {
     return dados;
 }
 
+async function atualizarPessoa(id, pessoa) {
+    const sql = `
+        UPDATE pessoas
+        SET nome = ?,
+            tipo = ?,
+            turno = ?,
+            turma = ?,
+            uid_rfid = ?
+        WHERE id = ?
+    `;
+
+    const [dados] = await conect.execute(sql, [
+        pessoa.nome,
+        pessoa.tipo,
+        pessoa.turno,
+        pessoa.turma || null,
+        pessoa.uid_rfid,
+        id
+    ]);
+
+    return dados;
+}
+
 async function listarPessoas() {
     const sql = `
         SELECT id, nome, tipo, turno, turma, uid_rfid
@@ -37,4 +60,4 @@ async function excluirPessoa(id) {
     return dados.affectedRows;
 }
 
-export default { cadastrarPessoa, listarPessoas, excluirPessoa };
+export default { cadastrarPessoa, atualizarPessoa, listarPessoas, excluirPessoa };

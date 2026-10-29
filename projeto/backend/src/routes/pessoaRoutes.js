@@ -6,6 +6,7 @@ const pessoaRoute = express.Router();
 
 pessoaRoute.post("/pessoas", PessoaController.cadastrar);
 pessoaRoute.get("/pessoas", PessoaController.listar);
+pessoaRoute.put("/pessoas/:id", PessoaController.atualizar);
 pessoaRoute.delete("/pessoas/:id", PessoaController.excluir);
 
 export default pessoaRoute;

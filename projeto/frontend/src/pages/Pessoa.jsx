@@ -1,12 +1,13 @@
-import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+
+import { useNavigate, useLocation } from "react-router-dom";
+import { useState, useEffect } from "react";
 import "./Pessoa.css";
 
 const Pessoa = () => {
     const navigate = useNavigate();
-    function sairDoSistema() {
-        navigate("/");
-    }
+    const location = useLocation();
+
+    const pessoa = location.state?.pessoa;
 
     const [nome, setNome] = useState("");
     const [tipo, setTipo] = useState("aluno");
@@ -16,6 +17,20 @@ const Pessoa = () => {
     const [mensagem, setMensagem] = useState("");
     const [carregando, setCarregando] = useState(false);
 
+    useEffect(() => {
+        if (pessoa) {
+            setNome(pessoa.nome);
+            setTipo(pessoa.tipo);
+            setTurno(pessoa.turno);
+            setTurma(pessoa.turma || "");
+            setUidRfid(pessoa.uid_rfid);
+        }
+    }, [pessoa]);
+
+    function sairDoSistema() {
+        navigate("/");
+    }
+
     async function cadastrarPessoa(event) {
         event.preventDefault();
 
@@ -23,31 +38,40 @@ const Pessoa = () => {
         setCarregando(true);
 
         try {
-            const resposta = await fetch(
-                "http://localhost:3000/api/pessoas",
-                {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json"
-                    },
-                    body: JSON.stringify({
-                        nome,
-                        tipo,
-                        turno,
-                        turma,
-                        uid_rfid: uidRfid
-                    })
-                }
-            );
+            const url = pessoa
+                ? `http://localhost:3000/api/pessoas/${pessoa.id}`
+                : "http://localhost:3000/api/pessoas";
+
+            const metodo = pessoa ? "PUT" : "POST";
+
+            const resposta = await fetch(url, {
+                method: metodo,
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    nome,
+                    tipo,
+                    turno,
+                    turma,
+                    uid_rfid: uidRfid
+                })
+            });
 
             const dados = await resposta.json();
 
             if (!resposta.ok) {
-                setMensagem(dados.message || "Erro ao cadastrar pessoa.");
+                setMensagem(dados.message || "Erro ao salvar pessoa.");
                 return;
             }
 
             setMensagem(dados.message);
+
+            if (pessoa) {
+                navigate("/lista-pessoas");
+                return;
+            }
+
             setNome("");
             setTipo("aluno");
             setTurno("manha");
@@ -65,23 +89,37 @@ const Pessoa = () => {
     return (
         <main className="pessoaPage">
             <section className="pessoaContainer">
-
                 <header className="pessoaHeader">
                     <div>
-                        <h1>Cadastrar pessoa</h1>
+                        <h1>
+                            {pessoa ? "Editar pessoa" : "Cadastrar pessoa"}
+                        </h1>
+
                         <p>
-                            Cadastre alunos e professores no sistema RFID.
+                            {pessoa
+                                ? "Corrija os dados cadastrados."
+                                : "Cadastre alunos e professores no sistema RFID."}
                         </p>
                     </div>
-
-                    <button
-                        type="button"
-                        className="btnSair"
-                        onClick={sairDoSistema}
-                    >
-                        Sair do sistema
-                    </button>
                     
+                    {pessoa ? (
+                        <button
+                            type="button"
+                            className="btnCancelar"
+                            onClick={() => navigate("/lista-pessoas")}
+                        >
+                            Cancelar edição
+                        </button>
+                    ) : (
+                        <button
+                            type="button"
+                            className="btnSair"
+                            onClick={sairDoSistema}
+                        >
+                            Sair do sistema
+                        </button>
+                    )}
+
                     <button
                         type="button"
                         onClick={() => navigate("/lista-pessoas")}
@@ -89,7 +127,6 @@ const Pessoa = () => {
                         Ver pessoas cadastradas
                     </button>
                 </header>
-
 
                 <form onSubmit={cadastrarPessoa} className="pessoaForm">
                     <label>
@@ -144,7 +181,7 @@ const Pessoa = () => {
                         UID do cartão RFID
                         <input
                             type="text"
-                            placeholder="Digite ou aproxime o cartão"
+                            placeholder="Digite o UID do cartão"
                             value={uidRfid}
                             onChange={(e) => setUidRfid(e.target.value)}
                             maxLength={50}
@@ -153,7 +190,11 @@ const Pessoa = () => {
                     </label>
 
                     <button type="submit" disabled={carregando}>
-                        {carregando ? "Cadastrando..." : "Cadastrar pessoa"}
+                        {carregando
+                            ? "Salvando..."
+                            : pessoa
+                            ? "Salvar alterações"
+                            : "Cadastrar pessoa"}
                     </button>
 
                     {mensagem && (
