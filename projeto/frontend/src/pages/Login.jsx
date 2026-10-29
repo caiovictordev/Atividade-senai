@@ -1,22 +1,73 @@
 import { Link } from "react-router-dom"
 import './Login.css'
+
+import { useState } from "react";
+
+const [email, setEmail] = useState("");
+const [senha, setSenha] = useState("");
+const [mensagem, setMensagem] = useState("");
+
+async function fazerLogin(event) {
+    event.preventDefault();
+
+    try {
+        const resposta = await fetch(
+            "http://localhost:3000/api/user/login",
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ email, senha })
+            }
+        );
+
+        const dados = await resposta.json();
+
+        if (!resposta.ok) {
+            setMensagem(dados.message);
+            return;
+        }
+
+        setMensagem(dados.message);
+
+    } catch (error) {
+        console.error(error);
+        setMensagem("Erro ao conectar com o servidor.");
+    }
+}
+
+
 const Login = () => {
   return (
     <div className="loginPage">
         <div className="containerInput">
             <h2>Entre em sua conta</h2>
-            <form action="">
-                <label>
-                    <span>Email</span>
-                    <input type="text" placeholder="Seu email aqui"/>
-                </label>
-                <label>
-                    <span>Senha</span>
-                    <input type="text" placeholder="Sua senha aqui"/>
-                </label>
-                <button type="submit">Concluir cadastro</button>
+            
+            <form onSubmit={fazerLogin}>
+                <input
+                    type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder="Seu email"
+                    required
+                />
 
-                <Link to='/cadastro'>Já tem um cadastro? Clique aqui</Link>
+                <input
+                    type="password"
+                    value={senha}
+                    onChange={(e) => setSenha(e.target.value)}
+                    placeholder="Sua senha"
+                    required
+                />
+
+                <button type="submit">Entrar</button>
+
+                <p>{mensagem}</p>
+
+                <Link to="/">
+                    Não tem cadastro? Clique aqui
+                </Link>
             </form>
         </div>
         <div className="containerText">
