@@ -1,8 +1,10 @@
-import { Link } from "react-router-dom"
 import './Login.css'
+import { Link, useNavigate } from "react-router-dom"
 
 import { useState } from "react";
 
+const Login = () => {
+const navigate = useNavigate();
 const [email, setEmail] = useState("");
 const [senha, setSenha] = useState("");
 const [mensagem, setMensagem] = useState("");
@@ -29,7 +31,7 @@ async function fazerLogin(event) {
             return;
         }
 
-        setMensagem(dados.message);
+        navigate("/pessoas")
 
     } catch (error) {
         console.error(error);
@@ -38,7 +40,6 @@ async function fazerLogin(event) {
 }
 
 
-const Login = () => {
   return (
     <div className="loginPage">
         <div className="containerInput">
@@ -65,7 +66,7 @@ const Login = () => {
 
                 <p>{mensagem}</p>
 
-                <Link to="/">
+                <Link to="/cadastro">
                     Não tem cadastro? Clique aqui
                 </Link>
             </form>
