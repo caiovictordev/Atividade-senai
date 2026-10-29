@@ -1,9 +1,11 @@
 
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import "./Cadastro.css";
 
 const Cadastro = () => {
+    const navigate = useNavigate();
     const [nome, setNome] = useState("");
     const [cpf, setCpf] = useState("");
     const [email, setEmail] = useState("");
@@ -40,6 +42,9 @@ const Cadastro = () => {
             }
 
             setMensagem(dados.message);
+            
+
+            navigate("/")
             setNome("");
             setCpf("");
             setEmail("");
