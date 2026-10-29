@@ -8,3 +8,4 @@ userRoute.post('/user/cadastro', ControlerUser.userRegisterController);
 userRoute.post('/user/login', ControlerUser.userLogin);
 userRoute.delete('/user/delete/:id', ControlerUser.deleteUser);
 
+export default userRoute;

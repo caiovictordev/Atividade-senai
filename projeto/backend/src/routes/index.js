@@ -1,13 +1,14 @@
-import express from "express"
+
+import express from "express";
+import userRoute from "./userRoutes.js";
 
 const routes = (app) => {
+    app.get("/", (req, res) => {
+        res.status(200).send("Servidor Rodando");
+    });
 
-    app.route('/').get((req, res) => {
-        let message = "Servidor Rodando"
-        res.status(200).send(message)
-    })
+    app.use("/api", userRoute);
+};
 
-    app.use(express.json())
-}
+export default routes;
 
-export default routes

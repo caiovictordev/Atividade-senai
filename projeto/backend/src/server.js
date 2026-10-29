@@ -1,12 +1,19 @@
+
 import express from "express";
-import "dotenv/config"
-import routes from "./routes";
+import cors from "cors";
+import "dotenv/config";
+import routes from "./routes/index.js";
 
-const app = express()
+const app = express();
 
-routes(app)
+app.use(cors());
+app.use(express.json());
 
-const porta = process.env.PORTA
-const end = process.env.END
+routes(app);
 
-app.listen(porta, () => console.log(`O servidor está rodando aqui: ${end}:${porta}`)) 
+const porta = process.env.PORTA || 3000;
+const end = process.env.END || "http://localhost";
+
+app.listen(porta, () => {
+    console.log(`O servidor está rodando aqui: ${end}:${porta}`);
+});

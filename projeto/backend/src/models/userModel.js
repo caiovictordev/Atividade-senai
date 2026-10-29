@@ -25,26 +25,26 @@ async function userRegister(nome, cpf, email, senha) {
 
 async function findEmail(email) {
     const sql = `
-        SELECT FROM users
+        SELECT * FROM users
         WHERE email = ? 
     `;
 
-    const dados = await conect.execute(sql, [email])
+    const [dados] = await conect.execute(sql, [email])
     return dados[0]
 }
 async function findCpf(cpf) {
     const sql = `
-        SELECT FROM users
+        SELECT * FROM users
         WHERE cpf = ?
     `;
 
-    const dados = await conect.execute(sql, [cpf])
+    const [dados] = await conect.execute(sql, [cpf])
     return dados[0]
 }
 
 async function deleteuser(id) {
     const sql = `
-        DELETE FROM users
+        DELETE * FROM users
         WHERE id = ?
     `;
     const [dados] = await conect.execute(sql, [id])

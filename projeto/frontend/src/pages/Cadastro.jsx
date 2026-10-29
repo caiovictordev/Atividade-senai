@@ -1,39 +1,126 @@
-import { Link } from "react-router-dom"
-import "./Cadastro.css"
+
+import { useState } from "react";
+import { Link } from "react-router-dom";
+import "./Cadastro.css";
+
 const Cadastro = () => {
-  return (
-    <div className="cadastroPage">
-        <div className="containerText">
-            <h2>Bem vindo!</h2>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat accusamus, iure vitae doloremque quibusdam odio quos, alias delectus labore neque deleniti in est consectetur corporis! Repellendus provident excepturi doloribus. At.</p>
-        </div>
-        <div className="containerInput">
-            <h2>Crie sua conta</h2>
-            <form action="">
-                <label>
-                    <span>Nome Completo</span>
-                    <input type="text" placeholder="Seu nome aqui"/>
-                </label>
-                <label>
-                    <span>CPF</span>
-                    <input type="text" placeholder="Seu cpf aqui"/>
-                </label>
-                <label>
-                    <span>Email</span>
-                    <input type="email" placeholder="Seu email aqui"/>
-                </label>
-                <label>
-                    <span>Senha</span>
-                    <input type="password" placeholder="Sua senha aqui"/>
-                </label>
-                <button type="submit">Concluir cadastro</button>
+    const [nome, setNome] = useState("");
+    const [cpf, setCpf] = useState("");
+    const [email, setEmail] = useState("");
+    const [senha, setSenha] = useState("");
+    const [mensagem, setMensagem] = useState("");
 
-                <Link to='/'>Já tem um cadastro? Clique aqui</Link>
-            </form>
-        </div>
-    </div>
-    
-  )
-}
+    async function cadastrarUsuario(event) {
+        event.preventDefault();
 
-export default Cadastro
+        setMensagem("Cadastrando...");
+
+        try {
+            const resposta = await fetch(
+                "http://localhost:3000/api/user/cadastro",
+                {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        nome,
+                        cpf,
+                        email,
+                        senha
+                    })
+                }
+            );
+
+            const dados = await resposta.json();
+
+            if (!resposta.ok) {
+                setMensagem(dados.message || "Erro ao cadastrar.");
+                return;
+            }
+
+            setMensagem(dados.message);
+            setNome("");
+            setCpf("");
+            setEmail("");
+            setSenha("");
+
+        } catch (error) {
+            console.error(error);
+            setMensagem("Não foi possível conectar ao servidor.");
+        }
+    }
+
+    return (
+        <div className="cadastroPage">
+            <div className="containerText">
+                <h2>Bem vindo!</h2>
+                <p>
+                    Faça seu cadastro para acessar o sistema.
+                </p>
+            </div>
+
+            <div className="containerInput">
+                <h2>Crie sua conta</h2>
+
+                <form onSubmit={cadastrarUsuario}>
+                    <label>
+                        <span>Nome Completo</span>
+                        <input
+                            type="text"
+                            placeholder="Seu nome aqui"
+                            value={nome}
+                            onChange={(e) => setNome(e.target.value)}
+                            required
+                        />
+                    </label>
+
+                    <label>
+                        <span>CPF</span>
+                        <input
+                            type="text"
+                            placeholder="Seu CPF aqui"
+                            value={cpf}
+                            onChange={(e) => setCpf(e.target.value)}
+                            required
+                        />
+                    </label>
+
+                    <label>
+                        <span>Email</span>
+                        <input
+                            type="email"
+                            placeholder="Seu email aqui"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            required
+                        />
+                    </label>
+
+                    <label>
+                        <span>Senha</span>
+                        <input
+                            type="password"
+                            placeholder="Sua senha aqui"
+                            value={senha}
+                            onChange={(e) => setSenha(e.target.value)}
+                            required
+                        />
+                    </label>
+
+                    <button type="submit">
+                        Concluir cadastro
+                    </button>
+
+                    <p>{mensagem}</p>
+
+                    <Link to="/">
+                        Já tem um cadastro? Clique aqui
+                    </Link>
+                </form>
+            </div>
+        </div>
+    );
+};
+
+export default Cadastro;
