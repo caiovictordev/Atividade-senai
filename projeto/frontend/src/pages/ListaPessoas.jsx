@@ -136,7 +136,8 @@ const ListaPessoas = () => {
                                     <th>Turno</th>
                                     <th>Turma</th>
                                     <th>UID RFID</th>
-                                    <th>Ações</th>
+                                    <th>Editar</th>
+                                    <th>Deletar</th>
 
                                 </tr>
                             </thead>
@@ -173,7 +174,8 @@ const ListaPessoas = () => {
                                             >
                                                 Editar
                                             </button>
-
+                                        </td>
+                                        <td>
                                             <button
                                                 type="button"
                                                 className="btnExcluir"

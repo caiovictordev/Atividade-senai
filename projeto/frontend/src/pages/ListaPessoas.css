@@ -181,3 +181,19 @@
 .btnExcluir:hover {
     background: #df352e;
 }
+
+.btnEditar{
+    padding: 8px 12px;
+    border: none;
+    border-radius: 8px;
+    background: #3b4ef4;
+    color: #ffffff;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.btnEditar:hover {
+    background: #2b39b3;
+}

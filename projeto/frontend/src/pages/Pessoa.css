@@ -140,6 +140,42 @@
     color: #ffffff;
 }
 
+.btnLisPerson{
+    padding: 10px 15px;
+    border: 1px solid #3b4ef4;
+    border-radius: 10px;
+    background: #ffffff;
+    color: #3b4ef4;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: color 0.2s ease,
+                background 0.2s ease;
+}
+
+.btnLisPerson:hover{
+    background: #3b4ef4;
+    color: #ffffff;
+}
+
+
+.btnCancelar{
+    padding: 10px 15px;
+    border: 1px solid #f4433b;
+    border-radius: 10px;
+    background: #ffffff;
+    color: #f4433b;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: color 0.2s ease,
+                background 0.2s ease;
+}
+
+.btnCancelar:hover{
+    background: #f4433b;
+    color: #ffffff;
+}
 @media (max-width: 600px) {
     .pessoaPage {
         align-items: flex-start;

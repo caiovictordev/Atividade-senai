@@ -122,6 +122,7 @@ const Pessoa = () => {
 
                     <button
                         type="button"
+                        className="btnLisPerson"
                         onClick={() => navigate("/lista-pessoas")}
                     >
                         Ver pessoas cadastradas
