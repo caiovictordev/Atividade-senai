@@ -1,0 +1,98 @@
+
+import pessoaModel from "../models/pessoaModel.js";
+
+class PessoaController {
+    static async cadastrar(req, res) {
+        try {
+            const { nome, tipo, turno, turma, uid_rfid } = req.body;
+
+            if (!nome || !tipo || !turno || !uid_rfid) {
+                return res.status(400).json({
+                    message: "Preencha os campos obrigatórios."
+                });
+            }
+
+            if (!["aluno", "professor"].includes(tipo)) {
+                return res.status(400).json({
+                    message: "Tipo de pessoa inválido."
+                });
+            }
+
+            if (!["manha", "tarde", "noite"].includes(turno)) {
+                return res.status(400).json({
+                    message: "Turno inválido."
+                });
+            }
+
+            await pessoaModel.cadastrarPessoa(
+                nome,
+                tipo,
+                turno,
+                turma,
+                uid_rfid
+            );
+
+            return res.status(201).json({
+                message: "Pessoa cadastrada com sucesso!"
+            });
+        } catch (error) {
+            console.error(error);
+
+            if (error.code === "ER_DUP_ENTRY") {
+                return res.status(409).json({
+                    message: "Esse UID RFID já está cadastrado."
+                });
+            }
+
+            return res.status(500).json({
+                message: "Erro interno no servidor."
+            });
+        }
+    }
+
+    static async listar(req, res) {
+        try {
+            const pessoas = await pessoaModel.listarPessoas();
+
+            return res.status(200).json(pessoas);
+        } catch (error) {
+            console.error(error);
+
+            return res.status(500).json({
+                message: "Erro ao buscar pessoas cadastradas."
+            });
+        }
+    }
+    
+    static async excluir(req, res) {
+        try {
+            const { id } = req.params;
+
+            if (!/^[1-9]\d*$/.test(id)) {
+                return res.status(400).json({
+                    message: "ID inválido."
+                });
+            }
+
+            const resultado = await pessoaModel.excluirPessoa(id);
+
+            if (resultado === 0) {
+                return res.status(404).json({
+                    message: "Pessoa não encontrada."
+                });
+            }
+
+            return res.status(200).json({
+                message: "Pessoa excluída com sucesso!"
+            });
+        } catch (error) {
+            console.error(error);
+
+            return res.status(500).json({
+                message: "Erro ao excluir pessoa."
+            });
+        }
+    }
+}
+
+export default PessoaController;
