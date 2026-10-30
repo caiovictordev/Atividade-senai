@@ -10,6 +10,7 @@ const Pessoa = () => {
     const pessoa = location.state?.pessoa;
 
     const [nome, setNome] = useState("");
+    const [cpf, setCpf] = useState("");
     const [tipo, setTipo] = useState("aluno");
     const [turno, setTurno] = useState("manha");
     const [turma, setTurma] = useState("");
@@ -20,6 +21,7 @@ const Pessoa = () => {
     useEffect(() => {
         if (pessoa) {
             setNome(pessoa.nome);
+            setCpf(pessoa.cpf || "");
             setTipo(pessoa.tipo);
             setTurno(pessoa.turno);
             setTurma(pessoa.turma || "");
@@ -51,6 +53,7 @@ const Pessoa = () => {
                 },
                 body: JSON.stringify({
                     nome,
+                    cpf,
                     tipo,
                     turno,
                     turma,
@@ -74,6 +77,7 @@ const Pessoa = () => {
 
             setNome("");
             setTipo("aluno");
+            setCpf("");
             setTurno("manha");
             setTurma("");
             setUidRfid("");
@@ -138,6 +142,18 @@ const Pessoa = () => {
                             value={nome}
                             onChange={(e) => setNome(e.target.value)}
                             maxLength={100}
+                            required
+                        />
+                    </label>
+
+                    <label>
+                        CPF
+                        <input
+                            type="text"
+                            placeholder="Digite o CPF"
+                            value={cpf}
+                            onChange={(e) => setCpf(e.target.value)}
+                            maxLength={14}
                             required
                         />
                     </label>

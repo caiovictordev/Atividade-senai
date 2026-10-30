@@ -1,21 +1,28 @@
 
 import { useState } from "react";
-import { Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./Cadastro.css";
 
 const Cadastro = () => {
     const navigate = useNavigate();
+
     const [nome, setNome] = useState("");
-    const [cpf, setCpf] = useState("");
     const [email, setEmail] = useState("");
     const [senha, setSenha] = useState("");
+    const [confirmarSenha, setConfirmarSenha] = useState("");
     const [mensagem, setMensagem] = useState("");
+    const [carregando, setCarregando] = useState(false);
 
     async function cadastrarUsuario(event) {
         event.preventDefault();
 
+        if (senha !== confirmarSenha) {
+            setMensagem("As senhas não coincidem.");
+            return;
+        }
+
         setMensagem("Cadastrando...");
+        setCarregando(true);
 
         try {
             const resposta = await fetch(
@@ -27,9 +34,9 @@ const Cadastro = () => {
                     },
                     body: JSON.stringify({
                         nome,
-                        cpf,
                         email,
-                        senha
+                        senha,
+                        confirmarSenha
                     })
                 }
             );
@@ -41,18 +48,12 @@ const Cadastro = () => {
                 return;
             }
 
-            setMensagem(dados.message);
-            
-
-            navigate("/")
-            setNome("");
-            setCpf("");
-            setEmail("");
-            setSenha("");
-
+            navigate("/");
         } catch (error) {
             console.error(error);
             setMensagem("Não foi possível conectar ao servidor.");
+        } finally {
+            setCarregando(false);
         }
     }
 
@@ -60,9 +61,7 @@ const Cadastro = () => {
         <div className="cadastroPage">
             <div className="containerText">
                 <h2>Bem vindo!</h2>
-                <p>
-                    Faça seu cadastro para acessar o sistema.
-                </p>
+                <p>Faça seu cadastro para acessar o sistema.</p>
             </div>
 
             <div className="containerInput">
@@ -76,17 +75,6 @@ const Cadastro = () => {
                             placeholder="Seu nome aqui"
                             value={nome}
                             onChange={(e) => setNome(e.target.value)}
-                            required
-                        />
-                    </label>
-
-                    <label>
-                        <span>CPF</span>
-                        <input
-                            type="text"
-                            placeholder="Seu CPF aqui"
-                            value={cpf}
-                            onChange={(e) => setCpf(e.target.value)}
                             required
                         />
                     </label>
@@ -113,8 +101,19 @@ const Cadastro = () => {
                         />
                     </label>
 
-                    <button type="submit">
-                        Concluir cadastro
+                    <label>
+                        <span>Confirmar senha</span>
+                        <input
+                            type="password"
+                            placeholder="Digite sua senha novamente"
+                            value={confirmarSenha}
+                            onChange={(e) => setConfirmarSenha(e.target.value)}
+                            required
+                        />
+                    </label>
+
+                    <button type="submit" disabled={carregando}>
+                        {carregando ? "Cadastrando..." : "Concluir cadastro"}
                     </button>
 
                     <p>{mensagem}</p>
