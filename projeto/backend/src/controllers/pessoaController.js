@@ -1,14 +1,25 @@
 
 import pessoaModel from "../models/pessoaModel.js";
 
+// Verifica se o CPF possui 11 números
+function cpfValido(cpf) {
+    return /^\d{11}$/.test(String(cpf).replace(/\D/g, ""));
+}
+
 class PessoaController {
     static async cadastrar(req, res) {
         try {
-            const { nome, tipo, turno, turma, uid_rfid } = req.body;
+            const { nome, cpf, tipo, turno, turma, uid_rfid } = req.body;
 
-            if (!nome || !tipo || !turno || !uid_rfid) {
+            if (!nome || !cpf || !tipo || !turno || !uid_rfid) {
                 return res.status(400).json({
                     message: "Preencha os campos obrigatórios."
+                });
+            }
+
+            if (!cpfValido(cpf)) {
+                return res.status(400).json({
+                    message: "CPF inválido. Informe os 11 números."
                 });
             }
 
@@ -26,6 +37,7 @@ class PessoaController {
 
             await pessoaModel.cadastrarPessoa(
                 nome,
+                String(cpf).replace(/\D/g, ""),
                 tipo,
                 turno,
                 turma,
@@ -41,7 +53,7 @@ class PessoaController {
 
             if (error.code === "ER_DUP_ENTRY") {
                 return res.status(409).json({
-                    message: "Esse UID RFID já está cadastrado."
+                    message: "CPF ou UID RFID já cadastrado."
                 });
             }
 
@@ -69,8 +81,10 @@ class PessoaController {
     static async atualizar(req, res) {
         try {
             const { id } = req.params;
+
             const {
                 nome,
+                cpf,
                 tipo,
                 turno,
                 turma,
@@ -83,41 +97,67 @@ class PessoaController {
                 });
             }
 
-            if (!nome || !tipo || !turno || !uid_rfid) {
+            if (!nome || !cpf || !tipo || !turno || !uid_rfid) {
                 return res.status(400).json({
                     message: "Preencha os campos obrigatórios."
                 });
             }
 
+            if (!cpfValido(cpf)) {
+                return res.status(400).json({
+                    message: "CPF inválido. Informe os 11 números."
+                });
+            }
+
+            if (!["aluno", "professor"].includes(tipo)) {
+                return res.status(400).json({
+                    message: "Tipo de pessoa inválido."
+                });
+            }
+
+            if (!["manha", "tarde", "noite"].includes(turno)) {
+                return res.status(400).json({
+                    message: "Turno inválido."
+                });
+            }
+
             const resultado = await pessoaModel.atualizarPessoa(
                 id,
-                { nome, tipo, turno, turma, uid_rfid }
+                {
+                    nome,
+                    cpf: String(cpf).replace(/\D/g, ""),
+                    tipo,
+                    turno,
+                    turma,
+                    uid_rfid
+                }
             );
 
             if (resultado.affectedRows === 0) {
                 return res.status(404).json({
-                    message: "Pessoa não encontrada."
+                    message: "Pessoa não encontrada ou nenhum dado foi alterado."
                 });
             }
 
             return res.status(200).json({
                 message: "Pessoa atualizada com sucesso."
             });
+
         } catch (error) {
+            console.error(error);
+
             if (error.code === "ER_DUP_ENTRY") {
                 return res.status(409).json({
-                    message: "Este UID RFID já está cadastrado."
+                    message: "CPF ou UID RFID já cadastrado."
                 });
             }
-
-            console.error(error);
 
             return res.status(500).json({
                 message: "Erro ao atualizar pessoa."
             });
         }
     }
-    
+
     static async excluir(req, res) {
         try {
             const { id } = req.params;

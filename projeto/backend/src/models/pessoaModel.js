@@ -1,14 +1,15 @@
 
 import conect from "../config/database.js";
 
-async function cadastrarPessoa(nome, tipo, turno, turma, uid_rfid) {
+async function cadastrarPessoa(nome, cpf, tipo, turno, turma, uid_rfid) {
     const sql = `
-        INSERT INTO pessoas (nome, tipo, turno, turma, uid_rfid)
-        VALUES (?, ?, ?, ?, ?)
+        INSERT INTO pessoas (nome, cpf, tipo, turno, turma, uid_rfid)
+        VALUES (?, ?, ?, ?, ?, ?)
     `;
 
     const [dados] = await conect.execute(sql, [
         nome,
+        cpf,
         tipo,
         turno,
         turma || null,
@@ -22,6 +23,7 @@ async function atualizarPessoa(id, pessoa) {
     const sql = `
         UPDATE pessoas
         SET nome = ?,
+            cpf = ?,
             tipo = ?,
             turno = ?,
             turma = ?,
@@ -31,6 +33,7 @@ async function atualizarPessoa(id, pessoa) {
 
     const [dados] = await conect.execute(sql, [
         pessoa.nome,
+        pessoa.cpf,
         pessoa.tipo,
         pessoa.turno,
         pessoa.turma || null,
@@ -43,7 +46,7 @@ async function atualizarPessoa(id, pessoa) {
 
 async function listarPessoas() {
     const sql = `
-        SELECT id, nome, tipo, turno, turma, uid_rfid
+        SELECT id, nome, cpf, tipo, turno, turma, uid_rfid
         FROM pessoas
         ORDER BY nome ASC
     `;
