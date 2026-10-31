@@ -26,7 +26,7 @@ const Cadastro = () => {
 
         try {
             const resposta = await fetch(
-                "http://localhost:3000/api/user/cadastro",
+                "https://atividade-senai-api.onrender.com/api/user/cadastro",
                 {
                     method: "POST",
                     headers: {

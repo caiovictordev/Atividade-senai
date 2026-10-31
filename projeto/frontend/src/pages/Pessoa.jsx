@@ -38,11 +38,13 @@ const Pessoa = () => {
 
         setMensagem("");
         setCarregando(true);
+        const uidFormatado = uidRfid.replace(/:/g, "").toUpperCase();
+
 
         try {
             const url = pessoa
-                ? `http://localhost:3000/api/pessoas/${pessoa.id}`
-                : "http://localhost:3000/api/pessoas";
+                ? `https://atividade-senai-api.onrender.com/api/pessoas/${pessoa.id}`
+                : "https://atividade-senai-api.onrender.com/api/pessoas";
 
             const metodo = pessoa ? "PUT" : "POST";
 
@@ -57,7 +59,7 @@ const Pessoa = () => {
                     tipo,
                     turno,
                     turma,
-                    uid_rfid: uidRfid
+                    uid_rfid: uidFormatado
                 })
             });
 

@@ -14,7 +14,7 @@ const ListaPessoas = () => {
         async function buscarPessoas() {
             try {
                 const resposta = await fetch(
-                    "http://localhost:3000/api/pessoas"
+                    "https://atividade-senai-api.onrender.com/api/pessoas"
                 );
 
                 const dados = await resposta.json();
@@ -48,7 +48,7 @@ const ListaPessoas = () => {
 
         try {
             const resposta = await fetch(
-                `http://localhost:3000/api/pessoas/${id}`,
+                `https://atividade-senai-api.onrender.com/api/pessoas/${id}`,
                 {
                     method: "DELETE"
                 }

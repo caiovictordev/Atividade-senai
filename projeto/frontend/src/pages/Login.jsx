@@ -14,7 +14,7 @@ async function fazerLogin(event) {
 
     try {
         const resposta = await fetch(
-            "http://localhost:3000/api/user/login",
+            "https://atividade-senai-api.onrender.com/api/user/login",
             {
                 method: "POST",
                 headers: {
