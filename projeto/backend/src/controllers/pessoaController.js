@@ -158,6 +158,45 @@ class PessoaController {
         }
     }
 
+    static async validarCartao(req, res) {
+        try {
+            const { uid_rfid } = req.body;
+
+            if (!uid_rfid) {
+                return res.status(400).json({
+                    message: "UID RFID não informado."
+                });
+            }
+
+            const pessoa = await pessoaModel.buscarPessoaPorUID(uid_rfid);
+
+            if (!pessoa) {
+                return res.status(404).json({
+                    autorizado: false,
+                    message: "Cartão não cadastrado."
+                });
+            }
+
+            return res.status(200).json({
+                autorizado: true,
+                message: "Cartão reconhecido.",
+                pessoa: {
+                    nome: pessoa.nome,
+                    tipo: pessoa.tipo,
+                    turma: pessoa.turma
+                }
+            });
+
+        } catch (error) {
+            console.error(error);
+
+            return res.status(500).json({
+                autorizado: false,
+                message: "Erro interno no servidor."
+            });
+        }
+    }
+
     static async excluir(req, res) {
         try {
             const { id } = req.params;

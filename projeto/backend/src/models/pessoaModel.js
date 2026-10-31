@@ -56,6 +56,18 @@ async function listarPessoas() {
     return dados;
 }
 
+async function buscarPessoaPorUID(uid_rfid) {
+    const sql = `
+        SELECT id, nome, tipo, turno, turma
+        FROM pessoas
+        WHERE uid_rfid = ?
+        LIMIT 1
+    `;
+
+    const [dados] = await conect.execute(sql, [uid_rfid])
+    return dados[0]
+}
+
 async function excluirPessoa(id) {
     const sql = "DELETE FROM pessoas WHERE id = ?";
     const [dados] = await conect.execute(sql, [id]);
@@ -63,4 +75,4 @@ async function excluirPessoa(id) {
     return dados.affectedRows;
 }
 
-export default { cadastrarPessoa, atualizarPessoa, listarPessoas, excluirPessoa };
+export default { cadastrarPessoa, atualizarPessoa, listarPessoas, buscarPessoaPorUID, excluirPessoa };

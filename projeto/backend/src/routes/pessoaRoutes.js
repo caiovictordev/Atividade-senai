@@ -6,6 +6,7 @@ const pessoaRoute = express.Router();
 
 pessoaRoute.post("/pessoas", PessoaController.cadastrar);
 pessoaRoute.get("/pessoas", PessoaController.listar);
+pessoaRoute.post("/catraca/validar", PessoaController.validarCartao);
 pessoaRoute.put("/pessoas/:id", PessoaController.atualizar);
 pessoaRoute.delete("/pessoas/:id", PessoaController.excluir);
 
