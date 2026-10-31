@@ -8,6 +8,10 @@ import { fileURLToPath } from "node:url";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
+const caminhoCertificado = process.env.RENDER
+    ? "/etc/secrets/ca.pem"
+    : path.join(__dirname, "ca.pem");
+
 const conect = mysql.createPool({
     host: process.env.DB_HOST,
     port: Number(process.env.DB_PORT),
@@ -16,7 +20,7 @@ const conect = mysql.createPool({
     password: process.env.DB_PASSWORD,
 
     ssl: {
-        ca: fs.readFileSync(path.join(__dirname, "ca.pem")),
+        ca: fs.readFileSync(caminhoCertificado),
         rejectUnauthorized: true
     },
 
