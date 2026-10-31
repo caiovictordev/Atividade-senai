@@ -11,9 +11,11 @@ app.use(express.json());
 
 routes(app);
 
-const porta = process.env.PORTA || 3000;
-const end = process.env.END || "http://localhost";
+/* const porta = process.env.PORTA || 3000;
+const end = process.env.END || "http://localhost"; */
 
-app.listen(porta, () => {
-    console.log(`O servidor está rodando aqui: ${end}:${porta}`);
+const PORT = process.env.PORT || 3000;
+
+app.listen(PORT, "0.0.0.0", () => {
+    console.log(`Servidor rodando na porta ${PORT}`);
 });
