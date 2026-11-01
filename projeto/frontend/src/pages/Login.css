@@ -1,46 +1,112 @@
 
 /* ==============================
-   PÁGINA DE LOGIN
+   PÁGINA
 ================================= */
 
 .loginPage {
     min-height: 100vh;
     width: 100%;
+
     display: flex;
-    overflow: hidden;
+    align-items: center;
+    justify-content: center;
+    gap: 70px;
+
+    padding: 50px 30px;
+    box-sizing: border-box;
 
     background: var(--bg-primary);
+    color: var(--text-primary);
     font-family: 'Inter', sans-serif;
+
+    transition: background var(--transition), color var(--transition);
+}
+
+/* ==============================
+   PAINEL DE APRESENTAÇÃO
+================================= */
+
+.loginPage .containerText {
+    flex: 1;
+    max-width: 420px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    padding: 35px;
+
+    background:
+        radial-gradient(
+            circle at 80% 20%,
+            var(--accent-soft),
+            transparent 60%
+        ),
+        var(--bg-secondary);
+
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+
+    box-shadow: var(--shadow);
+}
+
+.loginPage .containerText h2 {
+    margin-bottom: 18px;
+
+    color: var(--text-primary);
+    font-size: 36px;
+    font-weight: 800;
+    letter-spacing: -1px;
+}
+
+.loginPage .containerText p {
+    max-width: 360px;
+    margin: 0;
+
+    color: var(--text-secondary);
+    font-size: 15px;
+    line-height: 1.8;
+}
+
+/* ==============================
+   CARD DO FORMULÁRIO
+================================= */
+
+.loginPage .containerInput {
+    width: 100%;
+    max-width: 490px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    padding: 38px;
+
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+
+    box-shadow: var(--shadow);
+    box-sizing: border-box;
+}
+
+.loginPage .containerInput h2 {
+    width: 100%;
+    margin: 0 0 30px;
+
+    color: var(--text-primary);
+    font-size: 27px;
+    font-weight: 700;
+    text-align: left;
 }
 
 /* ==============================
    FORMULÁRIO
 ================================= */
 
-.loginPage .containerInput {
-    flex: 1.2;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 50px;
-
-    background: var(--bg-primary);
-}
-
-.loginPage .containerInput h2 {
-    margin-bottom: 35px;
-
-    color: var(--text-primary);
-    font-size: 30px;
-    font-weight: 700;
-    text-align: center;
-    letter-spacing: -0.7px;
-}
-
 .loginPage .containerInput form {
     width: 100%;
-    max-width: 420px;
 
     display: flex;
     flex-direction: column;
@@ -48,22 +114,25 @@
 }
 
 /* ==============================
-   CAMPOS
+   INPUTS
 ================================= */
 
 .loginPage .containerInput input {
     width: 100%;
-    min-height: 50px;
-    padding: 0 16px;
+    min-height: 48px;
+
+    padding: 0 15px;
 
     border: 1px solid var(--border-color);
     border-radius: var(--radius-md);
     outline: none;
 
-    background: var(--bg-secondary);
+    background: var(--input-bg);
     color: var(--text-primary);
 
-    font-size: 14px;
+    font-size: 13px;
+    box-sizing: border-box;
+
     transition: var(--transition);
 }
 
@@ -77,7 +146,6 @@
 
 .loginPage .containerInput input:focus {
     border-color: var(--accent);
-    background: var(--bg-tertiary);
     box-shadow: 0 0 0 3px var(--accent-soft);
 }
 
@@ -87,25 +155,27 @@
 
 .loginPage .containerInput button {
     width: 100%;
-    min-height: 50px;
+    min-height: 49px;
+
     margin-top: 5px;
 
     border: none;
     border-radius: var(--radius-md);
 
-    background: var(--accent-hover);
-    color: #082F49;
+    background: var(--accent);
+    color: white;
 
-    font-size: 14px;
+    font-size: 13px;
     font-weight: 700;
 
+    cursor: pointer;
     transition: var(--transition);
 }
 
 .loginPage .containerInput button:hover {
-    background: var(--accent);
-    box-shadow: 0 5px 20px rgba(56, 189, 248, 0.16);
+    background: var(--accent-hover);
     transform: translateY(-2px);
+    box-shadow: var(--shadow);
 }
 
 /* ==============================
@@ -113,8 +183,10 @@
 ================================= */
 
 .loginPage .containerInput form p {
-    color: #F87171;
-    font-size: 13px;
+    margin: 0;
+
+    color: var(--danger);
+    font-size: 12px;
     text-align: center;
     overflow-wrap: anywhere;
 }
@@ -127,74 +199,31 @@
     margin-top: 5px;
 
     color: var(--accent);
-    font-size: 13px;
+    font-size: 12px;
+    font-weight: 600;
     text-align: center;
 
+    text-decoration: none;
     transition: var(--transition);
 }
 
 .loginPage .containerInput form a:hover {
-    color: #7DD3FC;
+    color: var(--accent-hover);
     text-decoration: underline;
-}
-
-/* ==============================
-   PAINEL LATERAL
-================================= */
-
-.loginPage .containerText {
-    flex: 1;
-
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-
-    padding: 50px 40px;
-
-    background:
-        radial-gradient(
-            circle at 80% 20%,
-            rgba(56, 189, 248, 0.15),
-            transparent 40%
-        ),
-        #1F2937;
-
-    border-left: 1px solid var(--border-color);
-    text-align: center;
-}
-
-.loginPage .containerText h2 {
-    margin-bottom: 20px;
-
-    color: var(--text-primary);
-    font-size: 38px;
-    font-weight: 800;
-    letter-spacing: -1px;
-}
-
-.loginPage .containerText p {
-    max-width: 370px;
-
-    color: var(--text-secondary);
-    font-size: 15px;
-    line-height: 1.8;
 }
 
 /* ==============================
    RESPONSIVIDADE
 ================================= */
 
-@media (max-width: 768px) {
+@media (max-width: 900px) {
     .loginPage {
-        flex-direction: column-reverse;
+        gap: 30px;
     }
 
     .loginPage .containerText {
-        flex: auto;
-        padding: 40px 25px;
-        border-left: none;
-        border-bottom: 1px solid var(--border-color);
+        max-width: 320px;
+        padding: 25px;
     }
 
     .loginPage .containerText h2 {
@@ -202,17 +231,46 @@
     }
 
     .loginPage .containerInput {
-        flex: auto;
-        padding: 45px 25px;
-    }
-
-    .loginPage .containerInput h2 {
-        font-size: 25px;
+        max-width: 450px;
+        padding: 28px;
     }
 }
 
-@media (max-width: 400px) {
-    .loginPage .containerInput {
-        padding: 35px 18px;
+@media (max-width: 700px) {
+    .loginPage {
+        flex-direction: column;
+        gap: 20px;
+        padding: 25px 15px;
     }
+
+    .loginPage .containerText {
+        width: 100%;
+        max-width: 490px;
+        padding: 25px;
+    }
+
+    .loginPage .containerText h2 {
+        font-size: 25px;
+        margin-bottom: 10px;
+    }
+
+    .loginPage .containerText p {
+        font-size: 13px;
+    }
+
+    .loginPage .containerInput {
+        padding: 25px 20px;
+    }
+
+    .loginPage .containerInput h2 {
+        font-size: 23px;
+    }
+}
+
+.loginPage .containerText {
+    order: 1;
+}
+
+.loginPage .containerInput {
+    order: 2;
 }

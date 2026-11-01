@@ -10,6 +10,7 @@ import ListaPessoas from "./pages/ListaPessoas";
 import Dashboard from "./pages/Dashboard";
 
 import AdminLayout from "./components/AdminLayout";
+import Configuracoes from "./pages/Configuracoes";
 
 function App() {
     return (
@@ -25,6 +26,7 @@ function App() {
                     <Route path="/dashboard" element={<Dashboard />} />
                     <Route path="/pessoas" element={<Pessoa />} />
                     <Route path="/lista-pessoas" element={<ListaPessoas />} />
+                    <Route path="/configuracoes" element={<Configuracoes />} />
                 </Route>
 
             </Routes>

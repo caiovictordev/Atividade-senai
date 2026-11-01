@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./ListaPessoas.css";
@@ -7,6 +6,7 @@ const ListaPessoas = () => {
     const [pessoas, setPessoas] = useState([]);
     const [mensagem, setMensagem] = useState("");
     const [carregando, setCarregando] = useState(true);
+    const [busca, setBusca] = useState("");
 
     const navigate = useNavigate();
 
@@ -20,9 +20,7 @@ const ListaPessoas = () => {
                 const dados = await resposta.json();
 
                 if (!resposta.ok) {
-                    setMensagem(
-                        dados.message || "Erro ao carregar pessoas."
-                    );
+                    setMensagem(dados.message || "Erro ao carregar pessoas.");
                     return;
                 }
 
@@ -37,14 +35,37 @@ const ListaPessoas = () => {
 
         buscarPessoas();
     }, []);
+
+    // Filtrar pessoas de acordo com a pesquisa
+    const pessoasFiltradas = pessoas.filter((pessoa) => {
+        const termo = busca
+            .toLowerCase()
+            .normalize("NFD")
+            .replace(/[\u0300-\u036f]/g, "");
+
+        const campos = [
+            pessoa.nome,
+            pessoa.tipo,
+            pessoa.turma,
+            pessoa.turno,
+            pessoa.uid_rfid
+        ];
+
+        return campos.some((campo) =>
+            String(campo || "")
+                .toLowerCase()
+                .normalize("NFD")
+                .replace(/[\u0300-\u036f]/g, "")
+                .includes(termo)
+        );
+    });
+
     async function excluirPessoa(id) {
         const confirmar = window.confirm(
             "Tem certeza que deseja excluir esta pessoa?"
         );
 
-        if (!confirmar) {
-            return;
-        }
+        if (!confirmar) return;
 
         try {
             const resposta = await fetch(
@@ -62,9 +83,7 @@ const ListaPessoas = () => {
             }
 
             setPessoas((listaAtual) =>
-                listaAtual.filter(
-                    (pessoa) => pessoa.id !== id
-                )
+                listaAtual.filter((pessoa) => pessoa.id !== id)
             );
 
             alert(dados.message || "Pessoa excluída com sucesso!");
@@ -77,6 +96,7 @@ const ListaPessoas = () => {
     return (
         <main className="listaPessoasPage">
             <section className="listaPessoasContainer">
+
                 <header className="listaPessoasHeader">
                     <div>
                         <h1>Pessoas cadastradas</h1>
@@ -124,6 +144,30 @@ const ListaPessoas = () => {
                     </p>
                 )}
 
+                {!carregando && pessoas.length > 0 && (
+                    <div className="buscaPessoas">
+                        <i className="fas fa-search"></i>
+
+                        <input
+                            type="search"
+                            placeholder="Buscar por nome, turma, tipo, turno ou UID..."
+                            value={busca}
+                            onChange={(e) => setBusca(e.target.value)}
+                        />
+
+                        {busca && (
+                            <button
+                                type="button"
+                                className="limparBusca"
+                                onClick={() => setBusca("")}
+                                aria-label="Limpar pesquisa"
+                            >
+                                <i className="fas fa-times"></i>
+                            </button>
+                        )}
+                    </div>
+                )}
+
                 {carregando ? (
                     <p className="listaPessoasMensagem">
                         Carregando pessoas...
@@ -131,6 +175,10 @@ const ListaPessoas = () => {
                 ) : pessoas.length === 0 ? (
                     <p className="listaPessoasMensagem">
                         Nenhuma pessoa cadastrada ainda.
+                    </p>
+                ) : pessoasFiltradas.length === 0 ? (
+                    <p className="listaPessoasMensagem">
+                        Nenhuma pessoa encontrada para "{busca}".
                     </p>
                 ) : (
                     <div className="tabelaPessoasWrapper">
@@ -148,7 +196,7 @@ const ListaPessoas = () => {
                             </thead>
 
                             <tbody>
-                                {pessoas.map((pessoa) => (
+                                {pessoasFiltradas.map((pessoa) => (
                                     <tr key={pessoa.id}>
                                         <td>{pessoa.nome}</td>
 
@@ -202,8 +250,9 @@ const ListaPessoas = () => {
                 )}
 
                 <footer className="listaPessoasFooter">
-                    Exibindo {pessoas.length} pessoa(s)
+                    Exibindo {pessoasFiltradas.length} de {pessoas.length} pessoa(s)
                 </footer>
+
             </section>
         </main>
     );

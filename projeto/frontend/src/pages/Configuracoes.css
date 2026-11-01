@@ -1,0 +1,124 @@
+.configPage {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.configIntro h2 {
+    color: var(--text-primary);
+    font-size: 23px;
+}
+
+.configIntro p {
+    margin-top: 7px;
+    color: var(--text-secondary);
+    font-size: 13px;
+}
+
+.configSection {
+    padding: 24px;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow);
+}
+
+.configSectionTitle {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.configIcon {
+    width: 42px;
+    height: 42px;
+    display: grid;
+    place-items: center;
+    border-radius: 12px;
+    background: var(--accent-soft);
+    color: var(--accent);
+}
+
+.configSectionTitle h3 {
+    color: var(--text-primary);
+    font-size: 15px;
+}
+
+.configSectionTitle p {
+    margin-top: 5px;
+    color: var(--text-muted);
+    font-size: 11px;
+}
+
+.configOption {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    padding-top: 20px;
+}
+
+.configOptionInfo {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.configOptionInfo strong {
+    color: var(--text-primary);
+    font-size: 13px;
+}
+
+.configOptionInfo span {
+    color: var(--text-secondary);
+    font-size: 11px;
+}
+
+.configThemeButton,
+.configLogoutButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+    min-width: 105px;
+    padding: 11px 15px;
+    border-radius: var(--radius-md);
+    font-size: 12px;
+    font-weight: 600;
+    transition: var(--transition);
+}
+
+.configThemeButton {
+    background: var(--accent-soft);
+    border: 1px solid var(--accent);
+    color: var(--accent);
+}
+
+.configThemeButton:hover {
+    background: var(--accent);
+    color: white;
+}
+
+.configLogoutButton {
+    background: rgba(220, 38, 38, 0.10);
+    border: 1px solid rgba(220, 38, 38, 0.35);
+    color: var(--danger);
+}
+
+.configLogoutButton:hover {
+    background: var(--danger);
+    color: white;
+}
+
+@media (max-width: 600px) {
+    .configSection {
+        padding: 18px;
+    }
+
+    .configOption {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+}

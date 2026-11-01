@@ -1,38 +1,60 @@
-
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
 
 :root {
-    /* Cores principais */
-    --bg-primary: #111827;
-    --bg-secondary: #1F2937;
-    --bg-tertiary: #273548;
+    font-family: 'Inter', sans-serif;
 
-    /* Bordas */
-    --border-color: #374151;
-    --border-hover: #64748B;
+    --accent: #0284C7;
+    --accent-hover: #0369A1;
+    --accent-soft: rgba(2, 132, 199, 0.12);
 
-    /* Destaques */
-    --accent: #38BDF8;
-    --accent-hover: #0EA5E9;
-    --accent-soft: rgba(56, 189, 248, 0.10);
+    --success: #16A34A;
+    --danger: #DC2626;
+    --warning: #D97706;
 
-    /* Textos */
-    --text-primary: #F8FAFC;
-    --text-secondary: #94A3B8;
-    --text-muted: #64748B;
-
-    /* Estados */
-    --success: #22C55E;
-    --danger: #EF4444;
-    --warning: #F59E0B;
-
-    /* Formas */
     --radius-sm: 8px;
     --radius-md: 12px;
     --radius-lg: 18px;
 
-    /* Transições */
     --transition: 0.2s ease;
+}
+
+/* TEMA ESCURO */
+:root,
+[data-theme="dark"] {
+    color-scheme: dark;
+
+    --bg-primary: #111827;
+    --bg-secondary: #1F2937;
+    --bg-tertiary: #273548;
+
+    --border-color: #374151;
+    --border-hover: #64748B;
+
+    --text-primary: #F8FAFC;
+    --text-secondary: #94A3B8;
+    --text-muted: #64748B;
+
+    --input-bg: #111827;
+    --shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+/* TEMA CLARO */
+[data-theme="light"] {
+    color-scheme: light;
+
+    --bg-primary: #F1F5F9;
+    --bg-secondary: #FFFFFF;
+    --bg-tertiary: #E2E8F0;
+
+    --border-color: #E2E8F0;
+    --border-hover: #CBD5E1;
+
+    --text-primary: #0F172A;
+    --text-secondary: #475569;
+    --text-muted: #94A3B8;
+
+    --input-bg: #F8FAFC;
+    --shadow: 0 8px 25px rgba(15, 23, 42, 0.06);
 }
 
 html {
@@ -43,11 +65,17 @@ body {
     min-width: 320px;
     min-height: 100vh;
 
+    margin: 0;
+
     background: var(--bg-primary);
     color: var(--text-primary);
 
     font-family: 'Inter', sans-serif;
     -webkit-font-smoothing: antialiased;
+
+    transition:
+        background var(--transition),
+        color var(--transition);
 }
 
 button,
@@ -68,5 +96,5 @@ a {
 
 ::selection {
     background: var(--accent);
-    color: #082F49;
+    color: white;
 }

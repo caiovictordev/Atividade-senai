@@ -27,6 +27,10 @@ const Sidebar = () => {
                         <i className="fa-solid fa-user-plus"></i>
                         <span>Cadastrar pessoa</span>
                     </NavLink>
+                    <NavLink to="/configuracoes" className="sidebarLink">
+                        <i className="fa-solid fa-gear"></i>
+                        <span>Configurações</span>
+                    </NavLink>
                 </nav>
             </div>
 

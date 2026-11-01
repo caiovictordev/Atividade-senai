@@ -7,7 +7,8 @@ const Header = () => {
     const paginas = {
         "/dashboard": "Dashboard",
         "/lista-pessoas": "Pessoas cadastradas",
-        "/pessoas": "Cadastro de pessoa"
+        "/pessoas": "Cadastro de pessoa",
+        "/configuracoes": "Configurações"
     };
 
     const titulo = paginas[location.pathname] || "Área administrativa";
