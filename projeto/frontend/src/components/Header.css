@@ -1,0 +1,56 @@
+.adminHeader {
+    min-height: 90px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 20px 35px;
+    background: var(--bg-primary);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.headerSubtitle {
+    color: var(--accent);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1.3px;
+}
+
+.adminHeader h1 {
+    margin-top: 5px;
+    color: var(--text-primary);
+    font-size: 21px;
+    font-weight: 700;
+}
+
+.headerProfile {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+}
+
+.headerAvatar {
+    width: 40px;
+    height: 40px;
+    display: grid;
+    place-items: center;
+    border-radius: 12px;
+    background: var(--bg-tertiary);
+    color: var(--accent);
+}
+
+.headerUserInfo {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.headerUserInfo strong {
+    color: var(--text-primary);
+    font-size: 12px;
+}
+
+.headerUserInfo span {
+    color: var(--text-muted);
+    font-size: 10px;
+}

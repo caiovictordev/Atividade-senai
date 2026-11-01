@@ -1,0 +1,57 @@
+.adminLayout {
+    min-height: 100vh;
+    background: var(--bg-primary);
+}
+
+.adminMain {
+    min-height: 100vh;
+    margin-left: 250px;
+}
+
+.adminContent {
+    padding: 30px 35px;
+}
+
+@media (max-width: 768px) {
+    .sidebar {
+        width: 70px;
+        padding: 25px 10px;
+    }
+
+    .sidebarLogo {
+        justify-content: center;
+        padding: 0;
+    }
+
+    .sidebarLogo h2,
+    .sidebarLabel,
+    .sidebarLink span,
+    .sidebarFooter {
+        display: none;
+    }
+
+    .sidebarLink {
+        justify-content: center;
+        padding: 14px 8px;
+    }
+
+    .sidebarLink i {
+        font-size: 18px;
+    }
+
+    .adminMain {
+        margin-left: 70px;
+    }
+
+    .adminHeader {
+        padding: 18px;
+    }
+
+    .adminContent {
+        padding: 20px 15px;
+    }
+
+    .headerUserInfo {
+        display: none;
+    }
+}

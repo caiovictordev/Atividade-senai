@@ -31,7 +31,7 @@ async function fazerLogin(event) {
             return;
         }
 
-        navigate("/pessoas")
+        navigate("/dashboard")
 
     } catch (error) {
         console.error(error);
@@ -72,8 +72,12 @@ async function fazerLogin(event) {
             </form>
         </div>
         <div className="containerText">
-            <h2>Bem vindo!</h2>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat accusamus, iure vitae doloremque quibusdam odio quos, alias delectus labore neque deleniti in est consectetur corporis! Repellendus provident excepturi doloribus. At.</p>
+            <h2>Bem-vindo!</h2>
+            <p>
+                Gerencie o acesso de alunos e professores
+                de maneira prática e segura através da
+                tecnologia RFID.
+            </p>
         </div>
     </div>
   )
