@@ -17,6 +17,7 @@ const Pessoa = () => {
     const [uidRfid, setUidRfid] = useState("");
     const [mensagem, setMensagem] = useState("");
     const [carregando, setCarregando] = useState(false);
+    
 
     function formatarCPF(valor) {
         return valor
