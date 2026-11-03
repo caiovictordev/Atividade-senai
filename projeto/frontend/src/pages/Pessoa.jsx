@@ -18,6 +18,15 @@ const Pessoa = () => {
     const [mensagem, setMensagem] = useState("");
     const [carregando, setCarregando] = useState(false);
 
+    function formatarCPF(valor) {
+        return valor
+            .replace(/\D/g, "")
+            .slice(0, 11)
+            .replace(/(\d{3})(\d)/, "$1.$2")
+            .replace(/(\d{3})(\d)/, "$1.$2")
+            .replace(/(\d{3})(\d{1,2})$/, "$1-$2");
+        }
+
     useEffect(() => {
         if (pessoa) {
             setNome(pessoa.nome);
@@ -152,11 +161,11 @@ const Pessoa = () => {
                         CPF
                         <input
                             type="text"
-                            placeholder="Digite o CPF"
+                            placeholder="000.000.000-00"
                             value={cpf}
-                            onChange={(e) => setCpf(e.target.value)}
+                            onChange={(e) => setCpf(formatarCPF(e.target.value))}
                             maxLength={14}
-                            required
+                            inputMode="numeric"
                         />
                     </label>
 
