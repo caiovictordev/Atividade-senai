@@ -5,7 +5,7 @@
 
     --accent: #0284C7;
     --accent-hover: #0369A1;
-    --accent-soft: rgba(2, 132, 199, 0.12);
+    --accent-soft: rgba(2, 132, 199, 0.10);
 
     --success: #16A34A;
     --danger: #DC2626;
@@ -28,14 +28,16 @@
     --bg-tertiary: #273548;
 
     --border-color: #374151;
-    --border-hover: #64748B;
+    --border-hover: #4B5563;
 
     --text-primary: #F8FAFC;
     --text-secondary: #94A3B8;
     --text-muted: #64748B;
 
     --input-bg: #111827;
-    --shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+
+    /* Sombra discreta, sem brilho */
+    --shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
 }
 
 /* TEMA CLARO */
@@ -54,9 +56,12 @@
     --text-muted: #94A3B8;
 
     --input-bg: #F8FAFC;
-    --shadow: 0 8px 25px rgba(15, 23, 42, 0.06);
+
+    /* Sombra discreta */
+    --shadow: 0 2px 8px rgba(15, 23, 42, 0.05);
 }
 
+/* CONFIGURAÇÕES GERAIS */
 html {
     scroll-behavior: smooth;
 }

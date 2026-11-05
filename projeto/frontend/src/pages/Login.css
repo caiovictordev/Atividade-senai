@@ -336,10 +336,17 @@
 /* =================================
    VISUALIZAR SENHA
 ================================= */
-
 .campoSenha {
     position: relative;
     width: 100%;
+}
+
+.campoSenha input {
+    width: 100%;
+    min-height: 50px;
+    box-sizing: border-box;
+
+    padding: 0 45px 0 16px;
 }
 
 .campoSenha > i {
@@ -358,7 +365,6 @@
 .campoSenha > i:hover {
     color: var(--accent);
 }
-
 /* =================================
    BOTÃO ENTRAR
 ================================= */
@@ -384,8 +390,10 @@
 
 .loginPage .containerInput form > button:hover {
     background: var(--accent-hover);
-    transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(2, 132, 199, .2);
+}
+
+.loginPage .containerInput form > button:active {
+    background: var(--accent);
 }
 
 .loginPage .containerInput form > button:active {

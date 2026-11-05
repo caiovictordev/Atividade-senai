@@ -60,8 +60,46 @@ const Cadastro = () => {
     return (
         <div className="cadastroPage">
             <div className="containerText">
-                <h2>Bem vindo!</h2>
-                <p>Faça seu cadastro para acessar o sistema.</p>
+
+                <div className="loginLogo">
+                    <i className="fas fa-id-card"></i>
+                    <span>RFID Access</span>
+                </div>
+
+                <div className="loginTag">
+                    <span></span>
+                    Sistema de controle de acesso
+                </div>
+
+                <h2>
+                    Bem-vindo ao <strong>RFID Access.</strong>
+                </h2>
+
+                <p>
+                    Gerencie o acesso de alunos e professores de
+                    maneira prática, inteligente e segura através da
+                    tecnologia RFID.
+                </p>
+
+                <div className="loginFeatures">
+
+                    <div className="loginFeature">
+                        <i className="fas fa-wifi"></i>
+                        <span>Controle por tecnologia RFID</span>
+                    </div>
+
+                    <div className="loginFeature">
+                        <i className="fas fa-users"></i>
+                        <span>Gestão de alunos e professores</span>
+                    </div>
+
+                    <div className="loginFeature">
+                        <i className="fas fa-shield-alt"></i>
+                        <span>Gerenciamento de acessos</span>
+                    </div>
+
+                </div>
+
             </div>
 
             <div className="containerInput">

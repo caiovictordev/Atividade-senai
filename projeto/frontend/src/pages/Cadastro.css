@@ -1,13 +1,15 @@
-/* ==============================
-   PÁGINA
+/* =================================
+   PÁGINA PRINCIPAL
 ================================= */
+
 .cadastroPage {
     min-height: 100vh;
     width: 100%;
+
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 70px;
+    gap: 55px;
 
     padding: 50px 30px;
     box-sizing: border-box;
@@ -19,43 +21,39 @@
     transition: background var(--transition), color var(--transition);
 }
 
-
-
-/* ==============================
+/* =================================
    PAINEL DE APRESENTAÇÃO
 ================================= */
 
 .cadastroPage .containerText {
     flex: 1;
-    max-width: 420px;
+    max-width: 470px;
+    min-height: 490px;
 
     display: flex;
     flex-direction: column;
     justify-content: center;
 
-    padding: 35px;
+    padding: 45px;
+    box-sizing: border-box;
 
-    background:
-        radial-gradient(
-            circle at 80% 20%,
-            var(--accent-soft),
-            transparent 60%
-        ),
-        var(--bg-secondary);
-        
+    background: var(--bg-secondary);
+
     border: 1px solid var(--border-color);
-    border-radius: var(--radius-lg);
+    border-radius: 24px;
 
     box-shadow: var(--shadow);
 }
 
 .cadastroPage .containerText h2 {
-    margin-bottom: 18px;
+    max-width: 380px;
+    margin: 0 0 18px;
 
     color: var(--text-primary);
-    font-size: 36px;
+    font-size: 38px;
     font-weight: 800;
-    letter-spacing: -1px;
+    line-height: 1.2;
+    letter-spacing: -1.2px;
 }
 
 .cadastroPage .containerText p {
@@ -63,31 +61,32 @@
     margin: 0;
 
     color: var(--text-secondary);
-    font-size: 15px;
-    line-height: 1.8;
+    font-size: 14px;
+    line-height: 1.9;
 }
 
-/* ==============================
+/* =================================
    CARD DO FORMULÁRIO
 ================================= */
 
 .cadastroPage .containerInput {
     width: 100%;
-    max-width: 490px;
+    max-width: 480px;
 
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 
-    padding: 38px;
+    padding: 42px;
+    box-sizing: border-box;
 
     background: var(--bg-secondary);
+
     border: 1px solid var(--border-color);
-    border-radius: var(--radius-lg);
+    border-radius: 24px;
 
     box-shadow: var(--shadow);
-    box-sizing: border-box;
 }
 
 .cadastroPage .containerInput h2 {
@@ -95,21 +94,62 @@
     margin: 0 0 30px;
 
     color: var(--text-primary);
-    font-size: 27px;
-    font-weight: 700;
-    text-align: left;
+    font-size: 28px;
+    font-weight: 800;
+    letter-spacing: -.7px;
 }
 
-/* ==============================
+/* =================================
    FORMULÁRIO
 ================================= */
+
+.cadastroPage .containerText::before {
+    content: "";
+    position: absolute;
+
+    width: 250px;
+    height: 250px;
+
+    right: -90px;
+    top: -90px;
+
+    border: 1px solid rgba(56, 189, 248, .2);
+    border-radius: 50%;
+
+    box-shadow:
+        0 0 0 25px rgba(56, 189, 248, .035),
+        0 0 0 55px rgba(56, 189, 248, .025);
+
+    pointer-events: none;
+}
+
+.cadastroPage .containerText > * {
+    position: relative;
+    z-index: 1;
+}
+
+.cadastroPage .loginLogo {
+    margin-bottom: 55px;
+}
+
+.cadastroPage .loginTag {
+    margin-bottom: 20px;
+}
+
+.cadastroPage .containerText h2 strong {
+    color: var(--accent);
+}
+
+.cadastroPage .loginFeatures {
+    margin-top: 38px;
+}
 
 .cadastroPage .containerInput form {
     width: 100%;
 
     display: flex;
     flex-direction: column;
-    gap: 19px;
+    gap: 18px;
 }
 
 .cadastroPage .containerInput label {
@@ -121,36 +161,39 @@
 }
 
 .cadastroPage .containerInput label span {
-    color: var(--text-primary);
+    color: var(--text-secondary);
     font-size: 12px;
     font-weight: 600;
 }
 
-/* ==============================
+/* =================================
    INPUTS
 ================================= */
 
 .cadastroPage .containerInput input {
     width: 100%;
-    min-height: 48px;
+    min-height: 52px;
 
-    padding: 0 15px;
+    padding: 0 16px;
+    box-sizing: border-box;
 
     border: 1px solid var(--border-color);
     border-radius: var(--radius-md);
     outline: none;
 
-    background: var(--input-bg);
+    background: var(--bg-tertiary);
     color: var(--text-primary);
 
     font-size: 13px;
-    box-sizing: border-box;
 
     transition: var(--transition);
 }
 
 .cadastroPage .containerInput input::placeholder {
     color: var(--text-muted);
+    font-size: 13px;
+    opacity: .75;
+    letter-spacing: .2px;
 }
 
 .cadastroPage .containerInput input:hover {
@@ -162,15 +205,15 @@
     box-shadow: 0 0 0 3px var(--accent-soft);
 }
 
-/* ==============================
-   BOTÃO
+/* =================================
+   BOTÃO CADASTRAR
 ================================= */
 
 .cadastroPage .containerInput button {
     width: 100%;
-    min-height: 49px;
+    min-height: 52px;
 
-    margin-top: 5px;
+    margin-top: 8px;
     padding: 13px 18px;
 
     border: none;
@@ -186,23 +229,23 @@
     transition: var(--transition);
 }
 
+
+
 .cadastroPage .containerInput button:hover:not(:disabled) {
     background: var(--accent-hover);
-    transform: translateY(-2px);
-    box-shadow: var(--shadow);
 }
 
 .cadastroPage .containerInput button:active:not(:disabled) {
-    transform: translateY(0);
+    background: var(--accent);
 }
 
 .cadastroPage .containerInput button:disabled {
-    opacity: 0.6;
+    opacity: .6;
     cursor: not-allowed;
 }
 
-/* ==============================
-   MENSAGEM
+/* =================================
+   MENSAGENS
 ================================= */
 
 .cadastroPage .containerInput form p {
@@ -214,17 +257,19 @@
     overflow-wrap: anywhere;
 }
 
-/* ==============================
-   LINK LOGIN
+/* =================================
+   LINK PARA LOGIN
 ================================= */
 
 .cadastroPage .containerInput form a {
+    margin-top: 8px;
+
     color: var(--accent);
     font-size: 12px;
     font-weight: 600;
     text-align: center;
-    text-decoration: none;
 
+    text-decoration: none;
     transition: var(--transition);
 }
 
@@ -233,59 +278,79 @@
     text-decoration: underline;
 }
 
-/* ==============================
+/* =================================
    RESPONSIVIDADE
 ================================= */
 
-@media (max-width: 900px) {
+@media (max-width: 1000px) {
     .cadastroPage {
-        gap: 30px;
+        gap: 25px;
     }
 
     .cadastroPage .containerText {
-        max-width: 320px;
-        padding: 25px;
+        max-width: 390px;
+        padding: 30px;
     }
 
     .cadastroPage .containerText h2 {
-        font-size: 29px;
+        font-size: 31px;
     }
 
     .cadastroPage .containerInput {
-        max-width: 450px;
-        padding: 28px;
+        max-width: 440px;
+        padding: 30px;
     }
 }
 
-@media (max-width: 700px) {
+@media (max-width: 750px) {
     .cadastroPage {
         flex-direction: column;
-        justify-content: center;
         gap: 20px;
-
         padding: 25px 15px;
     }
 
     .cadastroPage .containerText {
         width: 100%;
-        max-width: 490px;
+        max-width: 480px;
+        min-height: auto;
         padding: 25px;
     }
 
     .cadastroPage .containerText h2 {
-        font-size: 25px;
-        margin-bottom: 10px;
-    }
-
-    .cadastroPage .containerText p {
-        font-size: 13px;
+        font-size: 27px;
     }
 
     .cadastroPage .containerInput {
-        padding: 25px 20px;
+        max-width: 480px;
+        padding: 28px 22px;
     }
 
     .cadastroPage .containerInput h2 {
-        font-size: 23px;
+        font-size: 25px;
     }
 }
+
+@media (max-width: 400px) {
+    .cadastroPage .containerText {
+        padding: 20px;
+    }
+
+    .cadastroPage .containerInput {
+        padding: 25px 18px;
+    }
+
+    .cadastroPage .containerText h2 {
+        font-size: 24px;
+    }
+}
+
+/* Elementos decorativos do painel */
+.cadastroPage .containerText {
+    position: relative;
+    overflow: hidden;
+
+    background:
+        linear-gradient(145deg, rgba(2, 132, 199, .16), transparent 65%),
+        var(--bg-secondary);
+}
+
